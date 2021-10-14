@@ -25,9 +25,47 @@ import model
 import csv
 
 
+
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 """
+
+def initCatalog():
+    catalog = model.initCatalog()
+    return catalog
+
+def loadData(catalog):
+    loadArtist(catalog)
+    loadArtworks(catalog)
+
+def loadArtist(catalog):
+
+    Artistfile = cf.data_dir + 'Artists-utf8-large.csv'
+    input_file = csv.DictReader(open(Artistfile, encoding='utf-8'))
+    for Artist in input_file:
+        model.addArtist(catalog, Artist)
+
+def loadArtworks(catalog):
+    Artworks = cf.data_dir + 'Artworks-utf8-large.csv'
+    input_file = csv.DictReader(open(Artworks, encoding='utf-8'))
+    for Artwork in input_file:
+        model.addArtwork(catalog, Artwork)
+
+def artistas_cronologico(catalog,anio_i,anio_f):
+
+    resultado = model.artistas_cronologico(catalog,anio_i,anio_f)
+    return resultado
+
+def obras_por_nacionalidad(catalog):
+    resultado = model.obras_por_nacionalidad(catalog)
+    return resultado
+
+def adquisiciones_cronologico(fecha_i,fecha_f,catalog):
+    resultado = model.adquisiciones_cronologico(fecha_i,fecha_f,catalog)
+    return resultado
+
+    
+    
 
 # Inicialización del Catálogo de libros
 
